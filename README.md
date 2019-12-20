@@ -48,10 +48,11 @@ Steps:
 19. we have imported Angular material theme in the main style.css in src folder
         @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
     Then, we added this link of material icons into index.html in src folder:
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
-20.To generate new component, we used ‘ng generate component’ command 
-21.we have set up routing for that component in 'app.routing.ts'
-22.we are generating Angular contact services class in app folder using this command:
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+        
+20. To generate new component, we used ‘ng generate component’ command 
+21. we have set up routing for that component in 'app.routing.ts'
+22. we are generating Angular contact services class in app folder using this command:
     'ng generate service contact'
 23. Update main app html template
 24. update contact form and contact list componenet
