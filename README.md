@@ -1,7 +1,7 @@
 # Contact App
 **Credit goes to Jayesh Agrawal,
 here is link:https://www.c-sharpcorner.com/article/contact-application-using-asp-net-core-web-api-angular-6-0-and-visual-studio-c/
-But that project was in .net core 2.0 and angular 6 , i have updated all the configuration**
+But that project was in .net core 2.0 and angular 6 , i have updated all the configuration plus added swagger ui**
 
 _sidenote: for self host certificate command is : dotnet dev-certs https --trust_
 
