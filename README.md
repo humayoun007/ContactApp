@@ -59,4 +59,7 @@ _sidenote: for self host certificate command is : dotnet dev-certs https --trust
 25. update contact form and contact list componenet
 26. finally Build components and run the project by : 'ng build' and 'dotnet run' 
 
+> ------ add swagger ---------------
+27. dotnet add contact-app.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
+    added code to startup.cs (which alreday added) and navigate to http://localhost:5000/swagger/
 
