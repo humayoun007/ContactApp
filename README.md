@@ -1,27 +1,93 @@
 # ContactApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+## sidenote: for self host certificate command is : dotnet dev-certs https --trust
 
-## Development server
+## Steps:
+1. download latest dot net sdk (os version wise)
+2. download vs code latest
+3. download nodejs latest 
+4. install latest angular
+5. Install these vs code extensions:
+   ASP.NET core VS Code Extension Pack
+   .NET Core Extension Pack
+   Angular v6 Snippets (now v8)
+   Angular 6 Snippets - TypeScript, Html, Angular Material, ngRx, RxJS & Flex Layout (now v8)
+6. Use these command to create project web api
+   mkdir contact-app  
+   cd contact-app  
+   dotnet new webapi 
+7. Build and debugger with F5 command
+8. Command: 
+    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+    dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+    dotnet tool install --global dotnet-aspnet-codegenerator
+    dotnet aspnet-codegenerator controller -name ContactController -async -api -m Contact -dc ContactAppContext -outDir Controllers
+    dotnet tool install --global dotnet-ef --version 3.1.0
+    dotnet ef migrations add InitialCreate
+    --for revert use : dotnet ef migrations remove
+    dotnet ef database update
+    dotnet build
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+9. Setup development variable and URL for project in terminal:
+      set ASPNETCORE_ENVIRONMENT=Development
+      set ASPNETCORE_URLS=http://localhost:5000
 
-## Code scaffolding
+10. run project with 'dotnet run'
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+>----------------- angular part ----------
+11. ng new Contact-App --skip-install (Note:--skip-install option is used to skip installation of the npm packages)
+12. move all item from Contact-App to root folder
+13. enter "npm install" command
+14. Go to 'angular.json' file, it is a configuration schema file.We changed ‘wwwroot’ folder path in OutputPath
+15. enter 'ng build' command
+16. apply routing to wwwroot index.html in startup.cs file
+17. enter 'dotnet run' command
+18. add angular material with this command: ng add @angular/material
+19. install angular cdk layout module for material using : npm install -d @angular/cdk
+20. we have imported Angular material theme in the main style.css in src folder
+        @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+    Then, we added this link of material icons into index.html in src folder:
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+21.To generate new component, we used ‘ng generate component’ command 
+22.we have set up routing for that component in 'app.routing.ts'
+23.we are generating Angular contact services class in app folder using this command:
+    'ng generate service contact'
+24. Update main app html template
+25. update contact form and contact list componenet
+26. finally Build components and run the project by : 'ng build' and 'dotnet run' 
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+>----------------- add swagger ---------------
+27. add command: dotnet add contact-app.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
+28. added code to startup.cs (which alreday added) and navigate to http://localhost:5000/swagger/
 
-## Running unit tests
+>---add jwt token
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+29. add command: dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 3.1.0
+30. added code to startup.cs (which already added) 
+To test in postman:
+>------------------------- authenticate a user -----
 
-## Running end-to-end tests
+Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the authenticate route of your local API - http://localhost:5000/users/authenticate
+Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON (application/json)".
+Enter a JSON object containing the test username and password in the "Body" textarea:
+{
+    "username": "test",
+    "password": "test"
+}
+Click the "Send" button, you should receive a "200 OK"
+>------- How to make authenticate request to retrive all users --------
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Change the http request method to "GET" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the users route of your local API - http://localhost:5000/users
+Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+Click the "Send" button, you should receive a "200 OK" response containing a JSON array with all the user records in the system
 
-## Further help
+# Credit (initial followup): 	
+## 1. Jayesh Agrawal
+link:https://www.c-sharpcorner.com/article/contact-application-using-asp-net-core-web-api-angular-6-0-and-visual-studio-c/
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## 2. Jason Watmore
+link: https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api**
