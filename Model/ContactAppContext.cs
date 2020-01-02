@@ -7,5 +7,10 @@ namespace contact_app.Model {
             get;
             set;
         }
+
+        public DbSet<User> User {
+            get;
+            set;
+        }
     }
 }

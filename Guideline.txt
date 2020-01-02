@@ -1,6 +1,10 @@
-Credit: 	Jayesh Agrawal
-link:
-https://www.c-sharpcorner.com/article/contact-application-using-asp-net-core-web-api-angular-6-0-and-visual-studio-c/
+Credit: 	
+1. Jayesh Agrawal
+link:https://www.c-sharpcorner.com/article/contact-application-using-asp-net-core-web-api-angular-6-0-and-visual-studio-c/
+
+2. Jason Watmore
+link: https://jasonwatmore.com/post/2019/10/11/aspnet-core-3-jwt-authentication-tutorial-with-example-api
+
 
 sidenote: for self host certificate command is : dotnet dev-certs https --trust
 
@@ -27,6 +31,7 @@ Steps:
     dotnet aspnet-codegenerator controller -name ContactController -async -api -m Contact -dc ContactAppContext -outDir Controllers
     dotnet tool install --global dotnet-ef --version 3.1.0
     dotnet ef migrations add InitialCreate
+    --for revert use : dotnet ef migrations remove
     dotnet ef database update
     dotnet build
 
@@ -60,10 +65,29 @@ Steps:
 
 
 ----------------- add swagger ---------------
-27. dotnet add contact-app.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
-    added code to startup.cs (which alreday added) and navigate to http://localhost:5000/swagger/
+27. add command: dotnet add contact-app.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
+28. added code to startup.cs (which alreday added) and navigate to http://localhost:5000/swagger/
 
+---add jwt token
 
+29. add command: dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 3.1.0
+30. added code to startup.cs (which already added) 
+To test in postman:
+------------------------- authenticate a user -----
+Change the http request method to "POST" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the authenticate route of your local API - http://localhost:5000/users/authenticate
+Select the "Body" tab below the URL field, change the body type radio button to "raw", and change the format dropdown selector to "JSON (application/json)".
+Enter a JSON object containing the test username and password in the "Body" textarea:
+{
+    "username": "test",
+    "password": "test"
+}
+Click the "Send" button, you should receive a "200 OK"
+------- How to make authenticate request to retrive all users ----
+Change the http request method to "GET" with the dropdown selector on the left of the URL input field.
+In the URL field enter the address to the users route of your local API - http://localhost:5000/users
+Select the "Authorization" tab below the URL field, change the type to "Bearer Token" in the type dropdown selector, and paste the JWT token from the previous authenticate step into the "Token" field.
+Click the "Send" button, you should receive a "200 OK" response containing a JSON array with all the user records in the system
 
 
 

@@ -4,10 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, AUTOCOMPLETE_PANEL_HEIGHT } from '@angular/material';
 
-import { ContactlistComponent } from '../contactlist/contactlist.component';
+import { ContactlistComponent } from '../contactlist';
 
-import { IContact } from '../model/contact';
-import { ContactService } from '../services/contact.service';
+import { IContact } from '@app/model';
+import { ContactService } from '@app/services';
 import { DBOperation } from '../shared/DBOperation';
 import { Global } from '../shared/Global';
 

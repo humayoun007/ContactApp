@@ -2,10 +2,10 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { ContactformComponent } from '../contactform/contactform.component';
+import { ContactformComponent } from '../contactform';
 
-import { ContactService } from '../services/contact.service';
-import { IContact } from '../model/contact';
+import { ContactService }  from '@app/services';
+import { IContact } from '@app/model';
 import { DBOperation } from '../shared/DBOperation';
 import { Global } from '../shared/Global';
 
